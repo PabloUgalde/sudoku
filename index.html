@@ -8,17 +8,19 @@
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icons/icon-192.png" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('sudoku_theme_v1');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <div class="app">
-
-  <header class="topbar">
-    <h1>Sudoku</h1>
-    <div class="timer" id="timer">00:00</div>
-    <button class="icon-btn" id="btn-pause" title="Pausar">⏸</button>
-  </header>
 
   <div class="toolbar">
     <select id="difficulty">
@@ -32,6 +34,12 @@
     <button class="icon-btn" id="btn-redo" title="Rehacer">↻</button>
     <button class="icon-btn" id="btn-check" title="Comprobar los números escritos">✓</button>
     <button class="icon-btn" id="btn-autonotes" title="Autocompletar anotaciones: calcula los candidatos posibles en cada celda vacía">✨</button>
+  </div>
+
+  <div class="statusbar">
+    <div class="timer" id="timer">00:00</div>
+    <button class="icon-btn" id="btn-pause" title="Pausar">⏸</button>
+    <button class="icon-btn" id="btn-theme" title="Cambiar esquema de colores">🌙</button>
   </div>
 
   <div class="palette" id="palette">

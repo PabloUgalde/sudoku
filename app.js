@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'sudoku_game_v1';
 const PREFS_KEY = 'sudoku_prefs_v1';
+const THEME_KEY = 'sudoku_theme_v1';
 const DIFFICULTY_LABELS = { easy: 'Fácil', medium: 'Medio', hard: 'Difícil', expert: 'Experto' };
 const COLOR_NAMES = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
 const COLOR_HEX = {
@@ -46,6 +47,7 @@ const btnAutoNotes = document.getElementById('btn-autonotes');
 const btnNotes = document.getElementById('btn-notes');
 const btnDigitFirst = document.getElementById('btn-digitfirst');
 const btnPause = document.getElementById('btn-pause');
+const btnTheme = document.getElementById('btn-theme');
 const btnResume = document.getElementById('btn-resume');
 const pauseOverlay = document.getElementById('pause-overlay');
 const winOverlay = document.getElementById('win-overlay');
@@ -572,6 +574,40 @@ function loadPrefs() {
   } catch (e) { /* localStorage no disponible */ }
 }
 
+function isDarkActive() {
+  const attr = document.documentElement.getAttribute('data-theme');
+  if (attr === 'dark') return true;
+  if (attr === 'light') return false;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function updateThemeButton() {
+  const dark = isDarkActive();
+  btnTheme.textContent = dark ? '☀️' : '🌙';
+  btnTheme.title = dark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dark ? '#14161a' : '#f4f5f7');
+}
+
+function applyTheme(theme) {
+  if (theme === 'light' || theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', theme);
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  updateThemeButton();
+}
+
+function loadTheme() {
+  try { return localStorage.getItem(THEME_KEY) || ''; } catch (e) { return ''; }
+}
+
+function toggleTheme() {
+  const next = isDarkActive() ? 'light' : 'dark';
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* localStorage no disponible */ }
+  applyTheme(next);
+}
+
 function wireEvents() {
   numpad.querySelectorAll('.num-btn[data-num]').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -627,9 +663,18 @@ function wireEvents() {
     state.paused = false;
     pauseOverlay.classList.remove('active');
   });
+
+  btnTheme.addEventListener('click', toggleTheme);
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (!document.documentElement.getAttribute('data-theme')) updateThemeButton();
+    });
+  }
 }
 
 function init() {
+  applyTheme(loadTheme());
   createBoardDOM();
   loadPrefs();
   btnNotes.classList.toggle('active', state.notesMode);
