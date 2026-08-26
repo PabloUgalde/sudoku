@@ -491,5 +491,7 @@ select { padding: 8px 10px; font-size: 14px; }
 
   .numpad { gap: 6px; }
   .num-btn { padding: 10px 0; font-size: 22px; }
+  .cell { font-size: clamp(20px, 6vw, 30px); }
+  .cell-notes { font-size: clamp(12px, 3.2vw, 16px); }
 }
 
