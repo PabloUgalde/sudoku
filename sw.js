@@ -1,10 +1,15 @@
-const CACHE_NAME = 'sudoku-v3';
+const CACHE_NAME = 'sudoku-v4';
 const ASSETS = [
   './',
   './index.html',
+  './sudoku.html',
+  './queens.html',
   './style.css',
+  './theme.js',
   './sudoku.js',
   './app.js',
+  './queens.js',
+  './queens-app.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
