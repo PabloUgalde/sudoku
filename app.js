@@ -4,12 +4,12 @@ const THEME_KEY = 'sudoku_theme_v1';
 const DIFFICULTY_LABELS = { easy: 'Fácil', medium: 'Medio', hard: 'Difícil', expert: 'Experto' };
 const COLOR_NAMES = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
 const COLOR_HEX = {
-  red: 'rgba(239, 68, 68, .5)',
-  orange: 'rgba(249, 115, 22, .5)',
-  yellow: 'rgba(234, 179, 8, .5)',
-  green: 'rgba(34, 197, 94, .5)',
-  blue: 'rgba(59, 130, 246, .5)',
-  purple: 'rgba(168, 85, 247, .5)',
+  red: '#ef4444',
+  orange: '#f97316',
+  yellow: '#eab308',
+  green: '#22c55e',
+  blue: '#3b82f6',
+  purple: '#a855f7',
 };
 
 const state = {
