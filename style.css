@@ -460,7 +460,10 @@ select { padding: 8px 10px; font-size: 14px; }
     height: 100dvh;
     max-height: 100dvh;
     overflow: hidden;
-    padding: 10px 10px 10px;
+    /* deja libre el espacio de la barra de navegación del teléfono (gestos/botones de Android,
+       barra de inicio del iPhone) para que los botones de abajo no queden tapados */
+    padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
+             calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
     gap: 8px;
   }
 

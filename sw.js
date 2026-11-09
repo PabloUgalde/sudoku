@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sudoku-v4';
+const CACHE_NAME = 'sudoku-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -17,7 +17,7 @@ const ASSETS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS.map((u) => new Request(u, { cache: 'reload' }))))
   );
   self.skipWaiting();
 });
