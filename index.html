@@ -85,10 +85,7 @@
         '▶ Partida en curso · ' + q.n + '×' + q.n + ' · ' + fmt(q.elapsed);
     }
   })();
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
-  }
 </script>
+<script src="pwa.js"></script>
 </body>
 </html>
